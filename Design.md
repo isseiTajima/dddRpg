@@ -1,20 +1,24 @@
 # Design
+
 ## type
+
 #### 〇
+
 domain
+
 #### □
+
 subDomain
+
 #### △
+
 value
-　
 
 ### Domain Design
+
 #### Character
-〇 player
 
-〇 nonPlayer
-
-□ tribe　
+□ tribe
 
 □ gender
 
@@ -22,9 +26,10 @@ value
 
 □ equipment
 
-□ business
+□ job
 
 #### Status
+
 〇 basicStatus
 
 〇 variableStatus
@@ -36,6 +41,7 @@ value
 △ defence
 
 ### Additional Links
+
 These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
