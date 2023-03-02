@@ -22,6 +22,6 @@ public interface CharacterRepository {
      *
      * @param character キャラクター
      */
-    Character save(Character character);
+    void save(Character character);
 
 }

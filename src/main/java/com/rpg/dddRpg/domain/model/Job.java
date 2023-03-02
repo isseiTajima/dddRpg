@@ -1,16 +1,20 @@
 package com.rpg.dddRpg.domain.model;
 
-import com.rpg.dddRpg.domain.type.JobClassification;
+import com.rpg.dddRpg.domain.value.Name;
+
+import java.util.UUID;
 
 /**
  * 職業
  */
 public class Job {
 
-    private final JobClassification jobClassification;
+    private final UUID jobId;
+    private final Name jobName;
 
-    Job(JobClassification jobClassification) {
-        this.jobClassification = jobClassification;
+    Job(UUID jobId, Name jobName) {
+        this.jobId = jobId;
+        this.jobName = jobName;
     }
 
     /**
@@ -19,10 +23,14 @@ public class Job {
      * @return 初期ジョブ
      */
     public static Job initial() {
-        return new Job(JobClassification.noJob);
+        return new Job(null , null);
     }
 
-    public JobClassification getJobClassification() {
-        return jobClassification;
+    public UUID getJobId() {
+        return jobId;
+    }
+
+    public Name getJobName() {
+        return jobName;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * 性別区分
  */
-public enum GenderClassification {
+public enum GenderType {
 
     man(1, "男") {
 
@@ -19,31 +19,31 @@ public enum GenderClassification {
     private final Integer code;
     private final String name;
 
-    GenderClassification(Integer code, String name) {
+    GenderType(Integer code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public static GenderClassification findByCode(Integer code) {
-        for (GenderClassification classification : values()) {
+    public static GenderType findByCode(Integer code) {
+        for (GenderType classification : values()) {
             if (Objects.equals(classification.code, code)) {
                 return classification;
             }
         }
 
-        return GenderClassification.unknown;
+        return GenderType.unknown;
     }
 
     public boolean isMan() {
-        return this == GenderClassification.man;
+        return this == GenderType.man;
     }
 
     public boolean isFemale() {
-        return this == GenderClassification.female;
+        return this == GenderType.female;
     }
 
     public boolean isUnknown() {
-        return this == GenderClassification.unknown;
+        return this == GenderType.unknown;
     }
 
     public Integer getCode() {

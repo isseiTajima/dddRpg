@@ -5,14 +5,14 @@ package com.rpg.dddRpg.domain.value;
  */
 public class Level {
 
-    int value;
+    Integer value;
 
-    private Level(int value) {
+    private Level(Integer value) {
         this.value = value;
     }
 
 
-    public static Level of(int value) {
+    public static Level of(Integer value) {
         return new Level(value);
     }
 
@@ -28,8 +28,12 @@ public class Level {
     /**
      * レベルアップ
      */
-    public void up() {
-        value++;
+    public Level up() {
+        return Level.of(value+1);
+    }
+
+    public static Level empty() {
+        return new Level(null);
     }
 
 }

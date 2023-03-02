@@ -1,7 +1,8 @@
 package com.rpg.dddRpg.domain.model;
 
-import com.rpg.dddRpg.domain.type.GenderClassification;
-import com.rpg.dddRpg.domain.type.TribeClassification;
+import com.rpg.dddRpg.domain.type.GenderType;
+import com.rpg.dddRpg.domain.type.JobType;
+import com.rpg.dddRpg.domain.type.RaceType;
 import com.rpg.dddRpg.domain.value.Level;
 import com.rpg.dddRpg.domain.value.Name;
 
@@ -13,22 +14,19 @@ public class Character {
     private final Name name;
 
     private final Level level;
-    private final TribeClassification tribe;
+    private final RaceType tribe;
 
-    private final GenderClassification gender;
+    private final GenderType gender;
 
-    private final Equipment equipment;
+    private final JobType job;
 
-    private final Job job;
-
-    Character(UUID id, Name name, Level level, TribeClassification tribe,
-              GenderClassification gender, Equipment equipment, Job job) {
+    Character(UUID id, Name name, Level level, RaceType tribe,
+              GenderType gender, JobType job) {
         this.id = id;
         this.name = name;
         this.level = level;
         this.tribe = tribe;
         this.gender = gender;
-        this.equipment = equipment;
         this.job = job;
     }
 
@@ -36,19 +34,15 @@ public class Character {
         return name;
     }
 
-    public TribeClassification getTribe() {
+    public RaceType getRaceType() {
         return tribe;
     }
 
-    public GenderClassification getGender() {
+    public GenderType getGenderType() {
         return gender;
     }
 
-    public Equipment getEquipment() {
-        return equipment;
-    }
-
-    public Job getBusiness() {
+    public JobType getJobType() {
         return job;
     }
 
@@ -60,21 +54,40 @@ public class Character {
         return id;
     }
 
+    /**
+     * empty判定
+     * @return boolean
+     */
+    public boolean isEmpty(){
+        // idがnullの場合はempty
+        return this.id == null;
+    }
 
     /**
      * キャラクター生成
      */
     public static class CharacterFactory {
-        public static Character createCharacter(Name name, TribeClassification tribe, GenderClassification gender) {
+        public static Character createCharacter(Name name, JobType jobType,
+                                                GenderType genderType, RaceType raceType) {
             return new Character(
                     UUID.randomUUID(),
                     name,
                     Level.initial(),
-                    tribe,
-                    gender,
-                    Equipment.initial(),
-                    Job.initial());
+                    raceType,
+                    genderType,
+                    jobType);
+
+        }
+        public static Character createEmptyCharacter() {
+            return new Character(
+                    null,
+                    null,
+                    Level.empty(),
+                    RaceType.unknown,
+                    GenderType.unknown,
+                    JobType.unknown);
 
         }
     }
+
 }

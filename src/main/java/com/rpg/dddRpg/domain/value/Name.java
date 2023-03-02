@@ -16,4 +16,8 @@ public class Name {
         return new Name(value);
     }
 
+    public String getValue(){
+        return this.value;
+    }
+
 }

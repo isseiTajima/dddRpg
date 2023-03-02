@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpg.dddRpg.domain.mapper.characters.CharactersMapperRepository">
+
+    <resultMap id="Result_Map_Characters" type="com.rpg.dddRpg.domain.mapper.characters.CharactersMapperEntity">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="jobType" property="jobType" jdbcType="INTEGER"/>
+        <result column="genderType" property="genderType" jdbcType="INTEGER"/>
+        <result column="raceType" property="raceType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findById" parameterType="string" resultMap="Result_Map_Characters">
+        select * from characters where id = #{id}
+    </select>
+    <select id="findAll" resultMap="Result_Map_Characters">
+        select * from characters
+    </select>
+    <insert id="insert" parameterType="com.rpg.dddRpg.domain.mapper.characters.CharactersMapperEntity">
+        insert into characters (id, name, jobType ,genderType ,raceType) values (#{id},#{name},#{jobId},#{genderType},#{raceType})
+    </insert>
+    <update id="update">
+        update characters set
+        id = #{id},name = #{name},jobType = #{jobType},genderType = #{genderType},raceType = #{raceType} where id = #{id}
+    </update>
+<!--    <delete id="deleteTopic">-->
+<!--        delete from topics where id = #{id}-->
+<!--    </delete>-->
+</mapper>

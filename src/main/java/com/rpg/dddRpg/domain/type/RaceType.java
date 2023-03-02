@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * 種族区分
  */
-public enum TribeClassification {
+public enum RaceType {
 
     human(1, "人間") {
 
@@ -22,31 +22,31 @@ public enum TribeClassification {
     private final Integer code;
     private final String name;
 
-    TribeClassification(Integer code, String name) {
+    RaceType(Integer code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public static TribeClassification findByCode(Integer code) {
-        for (TribeClassification classification : values()) {
+    public static RaceType findByCode(Integer code) {
+        for (RaceType classification : values()) {
             if (Objects.equals(classification.code, code)) {
                 return classification;
             }
         }
 
-        return TribeClassification.unknown;
+        return RaceType.unknown;
     }
 
     public boolean isHuman() {
-        return this == TribeClassification.human;
+        return this == RaceType.human;
     }
 
     public boolean isElf() {
-        return this == TribeClassification.elf;
+        return this == RaceType.elf;
     }
 
     public boolean isOgre() {
-        return this == TribeClassification.ogre;
+        return this == RaceType.ogre;
     }
 
     public Integer getCode() {

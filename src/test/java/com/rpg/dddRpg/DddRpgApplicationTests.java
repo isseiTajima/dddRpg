@@ -8,6 +8,7 @@ class DddRpgApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("test");
 	}
 
 }
