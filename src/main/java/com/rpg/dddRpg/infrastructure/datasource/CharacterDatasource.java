@@ -66,7 +66,7 @@ public class CharacterDatasource implements CharacterRepository {
      */
     void updateCharacter(Character character){
         // キャラクターテーブルにインサート
-        charactersMapperRepository.insert(createMapperEntityFrom(character));
+        charactersMapperRepository.update(createMapperEntityFrom(character));
     }
 
     /**

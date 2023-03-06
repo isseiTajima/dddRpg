@@ -10,4 +10,5 @@ public class DddRpgApplication {
 		SpringApplication.run(DddRpgApplication.class, args);
 	}
 
+
 }

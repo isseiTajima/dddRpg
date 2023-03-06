@@ -10,5 +10,6 @@ public interface CharactersMapperRepository {
     public CharactersMapperEntity findById(String id);
     public List<CharactersMapperEntity> findAll();
     public void insert(CharactersMapperEntity entity);
+    public void update(CharactersMapperEntity entity);
 
 }

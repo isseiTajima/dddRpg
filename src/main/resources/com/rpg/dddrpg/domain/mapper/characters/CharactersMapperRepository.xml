@@ -19,7 +19,7 @@
     <insert id="insert" parameterType="com.rpg.dddRpg.domain.mapper.characters.CharactersMapperEntity">
         insert into characters (id, name, jobType ,genderType ,raceType) values (#{id},#{name},#{jobId},#{genderType},#{raceType})
     </insert>
-    <update id="update">
+    <update id="update" parameterType="com.rpg.dddRpg.domain.mapper.characters.CharactersMapperEntity">
         update characters set
         id = #{id},name = #{name},jobType = #{jobType},genderType = #{genderType},raceType = #{raceType} where id = #{id}
     </update>

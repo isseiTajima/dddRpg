@@ -5,3 +5,8 @@ spring:
     password: root
     sql-script-encoding: utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+spring-doc:
+  version: '@spring-doc.version@'
+  swagger-ui:
+    use-root-path: true
