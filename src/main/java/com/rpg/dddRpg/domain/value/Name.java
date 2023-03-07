@@ -16,8 +16,13 @@ public class Name {
         return new Name(value);
     }
 
-    public String getValue(){
+    public static Name empty() {
+        return new Name(null);
+    }
+
+    public String getValue() {
         return this.value;
     }
+
 
 }

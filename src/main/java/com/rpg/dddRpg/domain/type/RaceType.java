@@ -37,6 +37,10 @@ public enum RaceType {
         return RaceType.unknown;
     }
 
+    public static RaceType findByName(String name) {
+        return RaceType.valueOf(name);
+    }
+
     public boolean isHuman() {
         return this == RaceType.human;
     }

@@ -1,6 +1,6 @@
 package com.rpg.dddRpg.domain.service;
 
-import com.rpg.dddRpg.domain.model.Character;
+import com.rpg.dddRpg.domain.model.character.Character;
 import com.rpg.dddRpg.domain.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

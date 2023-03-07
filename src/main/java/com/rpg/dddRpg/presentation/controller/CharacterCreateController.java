@@ -2,14 +2,16 @@ package com.rpg.dddRpg.presentation.controller;
 
 import com.rpg.dddRpg.application.service.CharacterRecordService;
 import com.rpg.dddRpg.presentation.controller.request.CharacterCreateRequest;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/character/create", consumes = {
+@RequestMapping(path = "/character", consumes = {
         MediaType.APPLICATION_JSON_VALUE},
-        produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+        produces = {
+                MediaType.APPLICATION_JSON_VALUE})
 public class CharacterCreateController {
 
 
@@ -21,10 +23,14 @@ public class CharacterCreateController {
     }
 
     @PostMapping(path = "/create", consumes = {
-            MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+            MediaType.APPLICATION_JSON_VALUE},
+            produces = {
+                    MediaType.APPLICATION_JSON_VALUE})
+    // urlencodedの場合@RequestBodyは付けない
+    @Operation(summary = "キャラクターを作成します。")
     @ResponseBody
     public void create(@RequestBody CharacterCreateRequest characterCreateRequest) {
-        characterRecordService.create(characterCreateRequest);
+        characterRecordService.create
+                (characterCreateRequest);
     }
 }

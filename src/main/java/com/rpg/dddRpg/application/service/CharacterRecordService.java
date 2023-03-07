@@ -1,9 +1,8 @@
 package com.rpg.dddRpg.application.service;
 
-import com.rpg.dddRpg.domain.model.Character;
-import com.rpg.dddRpg.domain.model.Job;
+import com.rpg.dddRpg.domain.model.character.CharacterFactory;
 import com.rpg.dddRpg.domain.repository.CharacterRepository;
-import com.rpg.dddRpg.domain.repository.JobRepository;
+import com.rpg.dddRpg.domain.type.CharacterType;
 import com.rpg.dddRpg.domain.type.GenderType;
 import com.rpg.dddRpg.domain.type.JobType;
 import com.rpg.dddRpg.domain.type.RaceType;
@@ -35,13 +34,16 @@ public class CharacterRecordService {
 
 
         // キャラクターの生成
-        Character character = Character.CharacterFactory.createCharacter(Name.of(request.getName())
-                , JobType.findByCode(request.getJobType())
-                , GenderType.findByCode(request.getGenderType())
-                , RaceType.findByCode(request.getRaceType()));
+        CharacterFactory factory = new CharacterFactory();
+        factory.withId(request.getId());
+        factory.withName(Name.of(request.getName()));
+        factory.withJobType(JobType.findByName(request.getJobTypeName()));
+        factory.withGenderType(GenderType.findByName(request.getGenderTypeName()));
+        factory.withRaceType(RaceType.findByName(request.getRaceTypeName()));
+        factory.withCharacterType(CharacterType.findByName(request.getCharacterTypeName()));
 
         // キャラクターの保存
-        characterRepository.save(character);
+        characterRepository.save(factory.build());
     }
 
 }

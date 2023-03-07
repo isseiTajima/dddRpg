@@ -7,15 +7,9 @@ import java.util.Objects;
  */
 public enum GenderType {
 
-    man(1, "男") {
-
-    },
-    female(2, ("女")) {
-
-    },
-    unknown(null, "不明") {
-
-    };
+    man(1, "男"),
+    female(2, "女"),
+    unknown(null, "不明");
     private final Integer code;
     private final String name;
 
@@ -32,6 +26,10 @@ public enum GenderType {
         }
 
         return GenderType.unknown;
+    }
+
+    public static GenderType findByName(String name) {
+        return GenderType.valueOf(name);
     }
 
     public boolean isMan() {

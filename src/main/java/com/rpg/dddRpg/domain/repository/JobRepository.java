@@ -1,6 +1,5 @@
 package com.rpg.dddRpg.domain.repository;
 
-import com.rpg.dddRpg.domain.model.Character;
 import com.rpg.dddRpg.domain.model.Job;
 
 import java.util.UUID;

@@ -2,8 +2,10 @@ package com.rpg.dddRpg.infrastructure.datasource;
 
 import com.rpg.dddRpg.domain.mapper.characters.CharactersMapperEntity;
 import com.rpg.dddRpg.domain.mapper.characters.CharactersMapperRepository;
-import com.rpg.dddRpg.domain.model.Character;
+import com.rpg.dddRpg.domain.model.character.Character;
+import com.rpg.dddRpg.domain.model.character.CharacterFactory;
 import com.rpg.dddRpg.domain.repository.CharacterRepository;
+import com.rpg.dddRpg.domain.type.CharacterType;
 import com.rpg.dddRpg.domain.type.GenderType;
 import com.rpg.dddRpg.domain.type.JobType;
 import com.rpg.dddRpg.domain.type.RaceType;
@@ -25,13 +27,31 @@ public class CharacterDatasource implements CharacterRepository {
         // キャラクター情報を取得する
         CharactersMapperEntity entity = charactersMapperRepository.findById(id.toString());
 
+        var factory = new CharacterFactory();
+
+        // 存在しない場合は空を返す
+        if (entity == null) {
+            return factory.build();
+        }
+
         // Entityからキャラクターを作成する
-        return Character.CharacterFactory.createCharacter(
-                Name.of(entity.getName()),
-                JobType.findByCode(entity.getJobType()),
-                GenderType.findByCode(entity.getGenderType()),
-                RaceType.findByCode(entity.getGenderType())
-        );
+        factory.withId(UUID.fromString(entity.getId()));
+        factory.withName(Name.of(entity.getName()));
+        factory.withJobType(JobType.findByCode(entity.getJobType()));
+        factory.withGenderType(GenderType.findByCode(entity.getGenderType()));
+        factory.withRaceType(RaceType.findByCode(entity.getRaceType()));
+        factory.withCharacterType(CharacterType.findByCode(entity.getCharacterType()));
+
+
+//        return Character.CharacterFactory.createCharacter(
+//                UUID.fromString(entity.getId()),
+//                Name.of(entity.getName()),
+//                JobType.findByCode(entity.getJobType()),
+//                GenderType.findByCode(entity.getGenderType()),
+//                RaceType.findByCode(entity.getGenderType())
+//        );
+        // 作成は一旦playable固定
+        return factory.build();
     }
 
     @Override
@@ -41,7 +61,7 @@ public class CharacterDatasource implements CharacterRepository {
         Character duplicateCharacter = findOneById(character.getId());
 
         // 存在しない場合はインサート
-        if(duplicateCharacter.isEmpty()){
+        if (duplicateCharacter == null) {
             // キャラクターテーブルにインサート
             insertCharacter(character);
             // キャラクターステータステーブルにインサート
@@ -53,7 +73,8 @@ public class CharacterDatasource implements CharacterRepository {
 
     /**
      * キャラクターテーブルにインサート
-     * @param character
+     *
+     * @param character 　登録するキャラクター
      */
     void insertCharacter(Character character){
         // キャラクターテーブルにインサート
@@ -62,7 +83,8 @@ public class CharacterDatasource implements CharacterRepository {
 
     /**
      * キャラクターテーブルにアップデート
-     * @param character
+     *
+     * @param character 　更新するキャラクター
      */
     void updateCharacter(Character character){
         // キャラクターテーブルにインサート
@@ -81,6 +103,7 @@ public class CharacterDatasource implements CharacterRepository {
         entity.setGenderType(character.getGenderType().getCode());
         entity.setRaceType(character.getRaceType().getCode());
         entity.setJobType(character.getJobType().getCode());
+        entity.setCharacterType(character.getCharacterType().getCode());
         return entity;
     }
 

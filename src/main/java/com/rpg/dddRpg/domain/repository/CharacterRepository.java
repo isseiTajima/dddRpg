@@ -1,6 +1,6 @@
 package com.rpg.dddRpg.domain.repository;
 
-import com.rpg.dddRpg.domain.model.Character;
+import com.rpg.dddRpg.domain.model.character.Character;
 
 import java.util.UUID;
 

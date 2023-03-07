@@ -8,9 +8,9 @@ public enum JobType {
      */
 
 
-        noJob(1, "無職") {
+    hero(1, "勇者") {
 
-        },
+    },
         warrior(2, "戦士") {
 
         },
@@ -20,9 +20,9 @@ public enum JobType {
         priest(4, ("僧侶")) {
 
         },
-        unknown(null, "不明") {
+    unknown(null, "不明") {
 
-        };
+    };
     private final Integer code;
     private final String name;
 
@@ -30,15 +30,30 @@ public enum JobType {
         this.code = code;
         this.name = name;
     }
-        public boolean isNoJob() {
-            return this == JobType.noJob;
+
+    public static JobType findByCode(Integer code) {
+        for (JobType classification : values()) {
+            if (Objects.equals(classification.code, code)) {
+                return classification;
+            }
         }
 
-        public boolean isWarrior() {
-            return this == JobType.warrior;
-        }
+        return JobType.unknown;
+    }
 
-        public boolean isWizard() {
+    public static JobType findByName(String name) {
+        return JobType.valueOf(name);
+    }
+
+    public boolean isNoJob() {
+        return this == JobType.hero;
+    }
+
+    public boolean isWarrior() {
+        return this == JobType.warrior;
+    }
+
+    public boolean isWizard() {
             return this == JobType.wizard;
         }
 
@@ -57,13 +72,4 @@ public enum JobType {
         public String getName() {
             return name;
         }
-    public static JobType findByCode(Integer code) {
-        for (JobType classification : values()) {
-            if (Objects.equals(classification.code, code)) {
-                return classification;
-            }
-        }
-
-        return JobType.unknown;
-    }
 }

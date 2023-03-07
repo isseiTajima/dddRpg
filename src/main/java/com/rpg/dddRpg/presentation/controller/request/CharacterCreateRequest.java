@@ -7,13 +7,12 @@ import java.util.UUID;
  */
 public class CharacterCreateRequest {
 
+    private UUID id;
     private String name;
-
-    private UUID jobId;
-
-    private Integer genderType;
-    private Integer raceType;
-    private Integer jobType;
+    private String characterTypeName;
+    private String genderTypeName;
+    private String raceTypeName;
+    private String jobTypeName;
 
     public String getName() {
         return name;
@@ -23,35 +22,44 @@ public class CharacterCreateRequest {
         this.name = name;
     }
 
-    public Integer getGenderType() {
-        return genderType;
+    public String getGenderTypeName() {
+        return genderTypeName;
     }
 
-    public void setGenderType(Integer genderType) {
-        this.genderType = genderType;
+    public void setGenderTypeName(String genderTypeName) {
+        this.genderTypeName = genderTypeName;
     }
 
-    public UUID getJobId() {
-        return jobId;
+
+    public String getRaceTypeName() {
+        return raceTypeName;
     }
 
-    public void setJobId(UUID jobId) {
-        this.jobId = jobId;
+    public void setRaceTypeName(String raceTypeName) {
+        this.raceTypeName = raceTypeName;
     }
 
-    public Integer getRaceType() {
-        return raceType;
+    public String getJobTypeName() {
+        return jobTypeName;
     }
 
-    public void setRaceType(Integer raceType) {
-        this.raceType = raceType;
+    public void setJobTypeName(String jobTypeName) {
+        this.jobTypeName = jobTypeName;
     }
 
-    public Integer getJobType() {
-        return jobType;
+    public UUID getId() {
+        return id;
     }
 
-    public void setJobType(Integer jobType) {
-        this.jobType = jobType;
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getCharacterTypeName() {
+        return characterTypeName;
+    }
+
+    public void setCharacterTypeName(String characterTypeName) {
+        this.characterTypeName = characterTypeName;
     }
 }

@@ -7,6 +7,7 @@ public class CharactersMapperEntity {
     private Integer jobType;
     private Integer genderType;
     private Integer raceType;
+    private Integer characterType;
 
 
     public String getId() {
@@ -47,5 +48,13 @@ public class CharactersMapperEntity {
 
     public void setRaceType(Integer raceType) {
         this.raceType = raceType;
+    }
+
+    public Integer getCharacterType() {
+        return characterType;
+    }
+
+    public void setCharacterType(Integer characterType) {
+        this.characterType = characterType;
     }
 }

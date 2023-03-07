@@ -25,15 +25,19 @@ public class Level {
         return new Level(1);
     }
 
+    public static Level empty() {
+        return new Level(null);
+    }
+
     /**
      * レベルアップ
      */
     public Level up() {
-        return Level.of(value+1);
+        return Level.of(value + 1);
     }
 
-    public static Level empty() {
-        return new Level(null);
+    public boolean isEmpty() {
+        return value == null;
     }
 
 }
