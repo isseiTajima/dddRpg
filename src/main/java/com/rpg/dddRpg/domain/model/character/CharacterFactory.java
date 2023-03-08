@@ -1,5 +1,6 @@
 package com.rpg.dddRpg.domain.model.character;
 
+import com.rpg.dddRpg.domain.model.Status;
 import com.rpg.dddRpg.domain.type.CharacterType;
 import com.rpg.dddRpg.domain.type.GenderType;
 import com.rpg.dddRpg.domain.type.JobType;
@@ -20,6 +21,7 @@ public class CharacterFactory {
     GenderType genderType;
     JobType jobType;
     CharacterType characterType;
+    Status status;
 
 //    public static Character createCharacter(UUID id, Name name, JobType jobType,
 //                                            GenderType genderType, RaceType raceType) {
@@ -77,6 +79,10 @@ public class CharacterFactory {
         this.characterType = characterType;
     }
 
+    public void withStatus(Status status) {
+        this.status = status;
+    }
+
     public Character build() {
 
         // typeが不明の場合は作成しない
@@ -89,23 +95,26 @@ public class CharacterFactory {
             this.level = Level.initial();
         }
 
+        // ステータスが設定されてない場合は初期化する
+        if (this.status == null) {
+            this.status = Status.initial(
+                    this.genderType, this.raceType, this.jobType
+            );
+        }
+
         Class<?> characterClass = characterType.getTypeClass();
         try {
-            // Note:リフレクションでインスタンス作成、もっといい方法はないか・・・
+            // Note:リフレクションでインスタンス作成、もっとスマートな方法はないか・・・
             Character character = (Character) characterClass
-                    .getDeclaredConstructors()[0]
+                    .getDeclaredConstructors()[0] // 1つのコンストラクタ限定
                     .newInstance(
                             this.id, this.name, this.level, this.raceType, this.genderType, this.jobType,
-                            this.characterType
+                            this.characterType, this.status
                     );
             return character;
-        } catch (InvocationTargetException e) {
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
             System.out.println("クラスの作成に失敗");
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 }

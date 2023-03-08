@@ -1,7 +1,10 @@
 package com.rpg.dddRpg.infrastructure.datasource;
 
+import com.rpg.dddRpg.domain.mapper.characters.CharacterStatusMapperEntity;
+import com.rpg.dddRpg.domain.mapper.characters.CharacterStatusMapperRepository;
 import com.rpg.dddRpg.domain.mapper.characters.CharactersMapperEntity;
 import com.rpg.dddRpg.domain.mapper.characters.CharactersMapperRepository;
+import com.rpg.dddRpg.domain.model.Status;
 import com.rpg.dddRpg.domain.model.character.Character;
 import com.rpg.dddRpg.domain.model.character.CharacterFactory;
 import com.rpg.dddRpg.domain.repository.CharacterRepository;
@@ -20,6 +23,8 @@ public class CharacterDatasource implements CharacterRepository {
 
     @Autowired
     private CharactersMapperRepository charactersMapperRepository;
+    @Autowired
+    private CharacterStatusMapperRepository characterStatusMapperRepository;
 
     @Override
     public Character findOneById(UUID id) {
@@ -42,6 +47,8 @@ public class CharacterDatasource implements CharacterRepository {
         factory.withRaceType(RaceType.findByCode(entity.getRaceType()));
         factory.withCharacterType(CharacterType.findByCode(entity.getCharacterType()));
 
+        // ステータス
+        factory.withStatus(createStatus(entity));
 
 //        return Character.CharacterFactory.createCharacter(
 //                UUID.fromString(entity.getId()),
@@ -52,6 +59,9 @@ public class CharacterDatasource implements CharacterRepository {
 //        );
         // 作成は一旦playable固定
         return factory.build();
+    }
+
+    Status createStatus(CharacterStatusMapperEntity entity) {
     }
 
     @Override
@@ -76,9 +86,20 @@ public class CharacterDatasource implements CharacterRepository {
      *
      * @param character 　登録するキャラクター
      */
-    void insertCharacter(Character character){
+    void insertCharacter(Character character) {
         // キャラクターテーブルにインサート
         charactersMapperRepository.insert(createMapperEntityFrom(character));
+    }
+
+    /**
+     * キャラクターステータステーブルにインサート
+     *
+     * @param character 　登録するキャラクター
+     */
+    void insertCharacterStatus(Character character) {
+        // キャラクターテーブルにインサート
+        characterStatusMapperRepository.insert(createStatusMapperEntityFrom(character.getId(),
+                character.getStatus()));
     }
 
     /**
@@ -86,17 +107,18 @@ public class CharacterDatasource implements CharacterRepository {
      *
      * @param character 　更新するキャラクター
      */
-    void updateCharacter(Character character){
+    void updateCharacter(Character character) {
         // キャラクターテーブルにインサート
         charactersMapperRepository.update(createMapperEntityFrom(character));
     }
 
     /**
      * MapperEntityを作成する
+     *
      * @param character キャラクター
      * @return MapperEntity
      */
-    CharactersMapperEntity createMapperEntityFrom(Character character){
+    CharactersMapperEntity createMapperEntityFrom(Character character) {
         CharactersMapperEntity entity = new CharactersMapperEntity();
         entity.setId(character.getId().toString());
         entity.setName(character.getName().getValue());
@@ -104,6 +126,26 @@ public class CharacterDatasource implements CharacterRepository {
         entity.setRaceType(character.getRaceType().getCode());
         entity.setJobType(character.getJobType().getCode());
         entity.setCharacterType(character.getCharacterType().getCode());
+        return entity;
+    }
+
+
+    /**
+     * MapperEntityを作成する
+     *
+     * @param characterId キャラクターId
+     * @param status      キャラクターステータス
+     * @return MapperEntity
+     */
+    CharacterStatusMapperEntity createStatusMapperEntityFrom(UUID characterId,
+                                                             Status status) {
+        var entity = new CharacterStatusMapperEntity();
+        entity.setId(characterId.toString());
+        entity.setLevel(status.getLevel().getValue());
+        entity.setHp(status.getHp().getValue());
+        entity.setAttack(status.getAttack().getValue());
+        entity.setDefence(status.getDefence().getValue());
+        entity.setSpeed(status.getSpeed().getValue());
         return entity;
     }
 

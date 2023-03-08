@@ -14,7 +14,7 @@ class HpTest {
 
         var value = Hp.initial(GenderType.man,
                 RaceType.human, JobType.hero);
-        System.out.println(value.getValue());
+        assertThat(value.getValue()).isGreaterThanOrEqualTo(30);
 
     }
 

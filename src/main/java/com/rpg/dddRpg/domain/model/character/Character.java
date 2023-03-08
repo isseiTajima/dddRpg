@@ -1,5 +1,6 @@
 package com.rpg.dddRpg.domain.model.character;
 
+import com.rpg.dddRpg.domain.model.Status;
 import com.rpg.dddRpg.domain.type.CharacterType;
 import com.rpg.dddRpg.domain.type.GenderType;
 import com.rpg.dddRpg.domain.type.JobType;
@@ -24,6 +25,8 @@ public interface Character {
     Level getLevel();
 
     UUID getId();
+
+    Status getStatus();
 
     /**
      * empty判定

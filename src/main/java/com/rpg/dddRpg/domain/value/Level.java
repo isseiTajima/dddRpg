@@ -40,4 +40,8 @@ public class Level {
         return value == null;
     }
 
+    public Integer getValue() {
+        return this.value;
+    }
+
 }

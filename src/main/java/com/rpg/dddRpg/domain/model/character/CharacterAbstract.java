@@ -1,5 +1,6 @@
 package com.rpg.dddRpg.domain.model.character;
 
+import com.rpg.dddRpg.domain.model.Status;
 import com.rpg.dddRpg.domain.type.CharacterType;
 import com.rpg.dddRpg.domain.type.GenderType;
 import com.rpg.dddRpg.domain.type.JobType;
@@ -17,20 +18,23 @@ public abstract class CharacterAbstract implements Character {
     private final Level level;
     private final RaceType raceType;
 
-    private final GenderType gender;
+    private final GenderType genderType;
 
-    private final JobType job;
+    private final JobType jobType;
     private final CharacterType characterType;
+    private final Status status;
 
     CharacterAbstract(UUID id, Name name, Level level, RaceType raceType,
-                      GenderType genderType, JobType jobType, CharacterType characterType) {
+                      GenderType genderType, JobType jobType, CharacterType characterType,
+                      Status status) {
         this.id = id;
         this.name = name;
         this.level = level;
         this.raceType = raceType;
-        this.gender = genderType;
-        this.job = jobType;
+        this.genderType = genderType;
+        this.jobType = jobType;
         this.characterType = characterType;
+        this.status = status;
     }
 
     public Name getName() {
@@ -42,11 +46,11 @@ public abstract class CharacterAbstract implements Character {
     }
 
     public GenderType getGenderType() {
-        return gender;
+        return genderType;
     }
 
     public JobType getJobType() {
-        return job;
+        return jobType;
     }
 
     public CharacterType getCharacterType() {
@@ -72,4 +76,8 @@ public abstract class CharacterAbstract implements Character {
     }
 
 
+    @Override
+    public Status getStatus() {
+        return status;
+    }
 }

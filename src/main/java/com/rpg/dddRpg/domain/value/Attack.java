@@ -8,24 +8,24 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * 体力みたいな
+ * 力
  */
 
-public class Hp {
+public class Attack {
     Integer value;
 
-    private Hp(Integer value) {
+    private Attack(Integer value) {
         this.value = value;
     }
 
-    public static Hp of(Integer value) {
-        return new Hp(value);
+    public static Attack of(Integer value) {
+        return new Attack(value);
     }
 
-    public static Hp initial(GenderType genderType, RaceType raceType,
-                             JobType jobType) {
+    public static Attack initial(GenderType genderType, RaceType raceType,
+                                 JobType jobType) {
         // 初期値
-        Integer hpValue = 1;
+        Integer attackValue = 1;
         // 性別による加算値を取得
         Integer addOfGenderValue = calcAddValueOfGender(genderType);
         // 種族による加算値を取得
@@ -34,39 +34,39 @@ public class Hp {
         Integer addOfJobValue = calcAddValueOfJob(jobType);
 
         // 加算値の合計を初期値とする
-        return new Hp(hpValue + addOfGenderValue + addOfRaceValue + addOfJobValue);
+        return new Attack(attackValue + addOfGenderValue + addOfRaceValue + addOfJobValue);
     }
 
     static Integer calcAddValueOfRace(RaceType raceType) {
         // 種族の初期値を取得
-        var hpInitialValue = HpInitialOfRace.findByType(raceType);
-        Integer diffValue = calcRandomDiffValue(hpInitialValue.getMinValue(),
-                hpInitialValue.getMaxValue());
+        var attackInitialValue = AttackInitialOfRace.findByType(raceType);
+        Integer diffValue = calcRandomDiffValue(attackInitialValue.getMinValue(),
+                attackInitialValue.getMaxValue());
 
         // 乱数と初期値から加算値を返却
-        return hpInitialValue.getMinValue() + diffValue;
+        return attackInitialValue.getMinValue() + diffValue;
     }
 
     static Integer calcAddValueOfGender(GenderType genderType) {
 
         // 性別の初期値を取得
-        var hpInitialValue = HpInitialOfGender.findByType(genderType);
-        Integer diffValue = calcRandomDiffValue(hpInitialValue.getMinValue(),
-                hpInitialValue.getMaxValue());
+        var attackInitialValue = AttackInitialOfGender.findByType(genderType);
+        Integer diffValue = calcRandomDiffValue(attackInitialValue.getMinValue(),
+                attackInitialValue.getMaxValue());
 
         // 乱数と初期値から加算値を返却
-        return hpInitialValue.getMinValue() + diffValue;
+        return attackInitialValue.getMinValue() + diffValue;
     }
 
     static Integer calcAddValueOfJob(JobType jobType) {
 
         // 性別の初期値を取得
-        var hpInitialValue = HpInitialOfJob.findByType(jobType);
-        Integer diffValue = calcRandomDiffValue(hpInitialValue.getMinValue(),
-                hpInitialValue.getMaxValue());
+        var attackInitialValue = AttackInitialOfJob.findByType(jobType);
+        Integer diffValue = calcRandomDiffValue(attackInitialValue.getMinValue(),
+                attackInitialValue.getMaxValue());
 
         // 乱数と初期値から加算値を返却
-        return hpInitialValue.getMinValue() + diffValue;
+        return attackInitialValue.getMinValue() + diffValue;
     }
 
     static Integer calcRandomDiffValue(Integer minValue, Integer maxValue) {
@@ -89,29 +89,29 @@ public class Hp {
         return this.value == null;
     }
 
-    enum HpInitialOfGender {
-        man(GenderType.man, 10, 15),
-        female(GenderType.female, 8, 13),
+    enum AttackInitialOfGender {
+        man(GenderType.man, 10, 13),
+        female(GenderType.female, 8, 12),
         unknown(GenderType.unknown, null, null);
 
         private final GenderType genderType;
         private final Integer minValue;
         private final Integer maxValue;
 
-        HpInitialOfGender(GenderType genderType, Integer minValue, Integer maxValue) {
+        AttackInitialOfGender(GenderType genderType, Integer minValue, Integer maxValue) {
             this.genderType = genderType;
             this.minValue = minValue;
             this.maxValue = maxValue;
         }
 
-        static HpInitialOfGender findByType(GenderType genderType) {
-            for (HpInitialOfGender type : values()) {
+        static AttackInitialOfGender findByType(GenderType genderType) {
+            for (AttackInitialOfGender type : values()) {
                 if (Objects.equals(type.genderType, genderType)) {
                     return type;
                 }
             }
 
-            return HpInitialOfGender.unknown;
+            return AttackInitialOfGender.unknown;
         }
 
 
@@ -124,30 +124,30 @@ public class Hp {
         }
     }
 
-    enum HpInitialOfRace {
-        human(RaceType.human, 10, 15),
-        elf(RaceType.elf, 8, 13),
-        ogre(RaceType.ogre, 15, 20),
+    enum AttackInitialOfRace {
+        human(RaceType.human, 5, 8),
+        elf(RaceType.elf, 3, 5),
+        ogre(RaceType.ogre, 8, 10),
         unknown(RaceType.unknown, null, null);
 
         private final RaceType raceType;
         private final Integer minValue;
         private final Integer maxValue;
 
-        HpInitialOfRace(RaceType raceType, Integer minValue, Integer maxValue) {
+        AttackInitialOfRace(RaceType raceType, Integer minValue, Integer maxValue) {
             this.raceType = raceType;
             this.minValue = minValue;
             this.maxValue = maxValue;
         }
 
-        static HpInitialOfRace findByType(RaceType raceType) {
-            for (HpInitialOfRace type : values()) {
+        static AttackInitialOfRace findByType(RaceType raceType) {
+            for (AttackInitialOfRace type : values()) {
                 if (Objects.equals(type.raceType, raceType)) {
                     return type;
                 }
             }
 
-            return HpInitialOfRace.unknown;
+            return AttackInitialOfRace.unknown;
         }
 
 
@@ -160,31 +160,31 @@ public class Hp {
         }
     }
 
-    enum HpInitialOfJob {
-        hero(JobType.hero, 10, 15),
-        warrior(JobType.warrior, 15, 20),
-        wizard(JobType.wizard, 5, 10),
-        priest(JobType.priest, 5, 10),
+    enum AttackInitialOfJob {
+        hero(JobType.hero, 8, 12),
+        warrior(JobType.warrior, 10, 15),
+        wizard(JobType.wizard, 5, 8),
+        priest(JobType.priest, 5, 8),
         unknown(JobType.unknown, null, null);
 
         private final JobType jobType;
         private final Integer minValue;
         private final Integer maxValue;
 
-        HpInitialOfJob(JobType jobType, Integer minValue, Integer maxValue) {
+        AttackInitialOfJob(JobType jobType, Integer minValue, Integer maxValue) {
             this.jobType = jobType;
             this.minValue = minValue;
             this.maxValue = maxValue;
         }
 
-        static HpInitialOfJob findByType(JobType jobType) {
-            for (HpInitialOfJob type : values()) {
+        static AttackInitialOfJob findByType(JobType jobType) {
+            for (AttackInitialOfJob type : values()) {
                 if (Objects.equals(type.jobType, jobType)) {
                     return type;
                 }
             }
 
-            return HpInitialOfJob.unknown;
+            return AttackInitialOfJob.unknown;
         }
 
 
