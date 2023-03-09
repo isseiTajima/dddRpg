@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rpg.dddRpg.domain.mapper.characters.CharacterStatusMapperEntity">
+<mapper namespace="com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperRepository">
 
     <resultMap id="Result_Map_CharacterStatus"
-               type="com.rpg.dddRpg.domain.mapper.characters.CharacterStatusMapperEntity">
+               type="com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperEntity">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="characterId" property="characterId" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
         <result column="hp" property="hp" jdbcType="INTEGER"/>
         <result column="attack" property="attack" jdbcType="INTEGER"/>
         <result column="defence" property="defence" jdbcType="INTEGER"/>
         <result column="speed" property="speed" jdbcType="INTEGER"/>
     </resultMap>
 
-    <!--    <select id="findById" parameterType="string" resultMap="Result_Map_Characters">-->
-    <!--        select * from characters where id = #{id}-->
-    <!--    </select>-->
+    <select id="findByCharacterId" parameterType="string" resultMap="Result_Map_CharacterStatus">
+        select * from characterStatus where characterId = #{characterId}
+    </select>
     <!--    <select id="findAll" resultMap="Result_Map_Characters">-->
     <!--        select * from characters-->
     <!--    </select>-->
-    <insert id="insert" parameterType="com.rpg.dddRpg.domain.mapper.characters.CharacterStatusMapperEntity">
-        insert into characterStatus (id, characterId, hp ,attack ,defence ,speed) values
-        (#{id},#{characterId},#{hp},#{attack},#{defence},#{speed})
+    <insert id="insert" parameterType="com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperEntity">
+        insert into characterStatus (id, characterId,level, hp ,attack ,defence ,speed) values
+        (#{id},#{characterId},#{level},#{hp},#{attack},#{defence},#{speed})
     </insert>
-    <update id="update" parameterType="com.rpg.dddRpg.domain.mapper.characters.CharacterStatusMapperEntity">
+    <update id="update" parameterType="com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperEntity">
         update characterStatus set
-        id = #{id},characterId = #{characterId},hp = #{hp},attack = #{attack},defence = #{defence},speed = #{speed}
+        id = #{id},characterId = #{characterId},level = #{level},hp = #{hp},attack = #{attack},defence =
+        #{defence},speed = #{speed}
         where id = #{id}
     </update>
 
