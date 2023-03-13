@@ -11,7 +11,7 @@ import com.rpg.dddrpg.domain.value.Name;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
-public class CharacterFactory {
+public class CharacterBuilder {
 
 
     UUID id;
@@ -22,34 +22,6 @@ public class CharacterFactory {
     JobType jobType;
     CharacterType characterType;
     Status status;
-
-//    public static Character createCharacter(UUID id, Name name, JobType jobType,
-//                                            GenderType genderType, RaceType raceType) {
-//        UUID createId = id;
-//        if (id == null) {
-//            // idが設定されてない場合は生成する
-//            createId = UUID.randomUUID();
-//        }
-//        return new CharacterAbstract(
-//                createId,
-//                name,
-//                Level.initial(),
-//                raceType,
-//                genderType,
-//                jobType);
-//
-//    }
-//
-//    public static CharacterAbstract createEmptyCharacter() {
-//        return new CharacterAbstract(
-//                null,
-//                null,
-//                Level.empty(),
-//                RaceType.unknown,
-//                GenderType.unknown,
-//                JobType.unknown);
-//
-//    }
 
     public void withId(UUID id) {
         this.id = id;
@@ -90,6 +62,11 @@ public class CharacterFactory {
             return null;
         }
 
+        // idが設定されていない場合は初期化する
+        if (this.id == null) {
+            this.id = UUID.randomUUID();
+        }
+
         // レベルが設定されていない場合は初期化する
         if (this.level == null) {
             this.level = Level.initial();
@@ -104,7 +81,8 @@ public class CharacterFactory {
 
         Class<?> characterClass = characterType.getTypeClass();
         try {
-            // Note:リフレクションでインスタンス作成、もっとスマートな方法はないか・・・
+            // Note:今回は共通化のためEntityを抽象化したため、このようにリフレクションでのビルダーとなっているが
+            // 分かりにくいのでEntityについては諦めた方が無難
             Character character = (Character) characterClass
                     .getDeclaredConstructors()[0] // 1つのコンストラクタ限定
                     .newInstance(

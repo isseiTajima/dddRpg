@@ -5,11 +5,13 @@ import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
-import com.rpg.dddrpg.domain.value.Level;
-import com.rpg.dddrpg.domain.value.Name;
+import com.rpg.dddrpg.domain.value.*;
+import lombok.Getter;
 
 import java.util.UUID;
 
+// interface defaultでよかった
+@Getter
 public abstract class CharacterAbstract implements Character {
 
     private final UUID id;
@@ -37,47 +39,25 @@ public abstract class CharacterAbstract implements Character {
         this.status = status;
     }
 
-    public Name getName() {
-        return name;
+
+    public Attack getAttack() {
+        return status.getAttack();
     }
 
-    public RaceType getRaceType() {
-        return raceType;
+    public Hp getHp() {
+        return status.getHp();
     }
 
-    public GenderType getGenderType() {
-        return genderType;
+    public Defence getDefence() {
+        return status.getDefence();
     }
 
-    public JobType getJobType() {
-        return jobType;
+    public Speed getSpeed() {
+        return status.getSpeed();
     }
 
-    public CharacterType getCharacterType() {
-        return characterType;
-    }
-
-    public Level getLevel() {
-        return level;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    /**
-     * empty判定
-     *
-     * @return boolean
-     */
     public boolean isEmpty() {
-        // idがnullの場合はempty
         return this.id == null;
     }
 
-
-    @Override
-    public Status getStatus() {
-        return status;
-    }
 }

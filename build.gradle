@@ -1,12 +1,12 @@
-
 plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'java'
+	id "com.palantir.docker" version "0.34.0"
+	id "org.openapi.generator" version "6.2.0"
 }
 
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
-
 
 group = 'com.rpg'
 version = '0.0.1-SNAPSHOT'
@@ -24,9 +24,14 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.14'
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.14'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok'
+	implementation group: 'org.openapitools', name: 'openapi-generator-gradle-plugin', version: '6.2.0'
+	implementation group: 'org.openapitools', name: 'jackson-databind-nullable', version: '0.2.3'
+	annotationProcessor 'org.projectlombok:lombok'
+
 	runtimeOnly 'mysql:mysql-connector-java'
 //	runtimeOnly 'mysql:mysql-connector-java:5.1.34'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }
@@ -34,3 +39,63 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jar {
+	enabled = false
+	manifest {
+		attributes(
+				'Main-Class': 'DddRpgApplication'
+		)
+	}
+}
+
+openApiGenerate {
+	generatorName = "spring"
+	// 自動生成元となるopenapiの場所を指定しましょう。
+	inputSpec = "$rootDir/openapi.yml".toString()
+	// 自動生成したソースの置き場を指定しましょう。
+	outputDir = "$buildDir/generated".toString()
+	// 自動生成したControllerの配置位置を指定しましょう。
+	apiPackage = "com.rpg.dddrpg.presentation.controller"
+	// 利用していないですが、公式サイトに則り記載しています。
+	invokerPackage = "org.openapi.example.invoker"
+	// 自動生成したModel(Request, Response等)の配置位置を指定しましょう。
+	modelPackage = "com.rpg.dddrpg.presentation.controller"
+//	// テストファイルの自動生成に関する設定。
+//	generateModelTests = false
+//	generateApiTests = false
+//	// ドキュメントの生成に関するオプション
+//	generateModelDocumentation = false
+//	generateApiDocumentation = false
+	// その他オプション設定 [参照](https://openapi-generator.tech/docs/generators/java)
+	configOptions = [
+			// 自動生成時のJava Library
+			dataLibrary  : "java17",
+//			// 自動生成時に作成されるドキュメントのプロパイダー
+//			documentationProvider: "springFox",
+			// 自動生成時、Controllerはインターフェースのみ作成することを指示
+			interfaceOnly: "true"
+	]
+}
+
+// 自動生成されたファイルを参照するために必要な記述
+sourceSets {
+	main {
+		java {
+			srcDir "${openApiGenerate.outputDir.get()}/src/main/java"
+		}
+		// SpringFoxの参照をしたいがために設定しています。
+		resources {
+			srcDir "${openApiGenerate.outputDir.get()}/src/main/resources"
+		}
+	}
+}
+
+
+//docker {
+//	name "${project.group}/${bootJar.archiveBaseName}"
+//
+//	// 追加
+//	files bootJar.archiveFile
+//	buildArgs(['JAR_FILE': "${bootJar.archiveFileName}"])
+//}

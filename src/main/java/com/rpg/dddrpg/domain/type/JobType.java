@@ -11,15 +11,15 @@ public enum JobType {
     hero(1, "勇者") {
 
     },
-        warrior(2, "戦士") {
+    warrior(2, "戦士") {
 
-        },
-        wizard(3, ("魔法使い")) {
+    },
+    wizard(3, ("魔法使い")) {
 
-        },
-        priest(4, ("僧侶")) {
+    },
+    priest(4, ("僧侶")) {
 
-        },
+    },
     unknown(null, "不明") {
 
     };

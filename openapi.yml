@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: dddRpg-api
+  description: 2つのapiのうち1つをopenapiで生成する
+tags:
+  #  - name:character
+  - name:battle
+servers:
+  - url: 'http://localhost:8080'
+    description:
+      "ローカル環境"
+paths:
+  #  /character/search:
+  #    post:
+  #      description: キャラクター検索
+  #      parameters:
+  #        - in: characterId
+  #          name: characterId
+  #          description: キャラクターID
+  #          required: true
+  #          schema:
+  #            type: string
+  ##            format: string
+  #            example: 32b65aaf-e62a-4358-9574-ed3a8a22d44d
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #      #              schema:
+  #      #                $ref: '#/components/schemas/Hello'
+  #      tags:
+  #        - search
+  #  /character/create:
+  #    post:
+  #      description: キャラクター作成
+  #      parameters:
+  #        - in: characterId
+  #          name: characterId
+  #          description: キャラクターID
+  #          required: false
+  #          schema:
+  #            type: string
+  #            example: 32b65aaf-e62a-4358-9574-ed3a8a22d44d
+  #        - in: name
+  #          name: name
+  #          description: キャラクター名称
+  #          required: true
+  #          schema:
+  #            type: string
+  #            example: 山田太郎
+  #        - in: characterTypeName
+  #          name: characterTypeName
+  #          description: キャラクター種別
+  #          required: true
+  #          schema:
+  #            type: string
+  #            example: 操作可能
+  #        - in: genderTypeName
+  #          name: genderTypeName
+  #          description: 性別
+  #          required: true
+  #          schema:
+  #            type: string
+  #            example: 男
+  #        - in: raceTypeName
+  #          name: raceTypeName
+  #          description: 種族
+  #          required: true
+  #          schema:
+  #            type: string
+  #            format: string
+  #            example: 人間
+  #        - in: jobTypeName
+  #          name: jobTypeName
+  #          description: 職業
+  #          required: true
+  #          schema:
+  #            type: string
+  #            format: string
+  #            example: 戦士
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #      tags:
+  #        - create
+  /battle/turnstart:
+    post:
+      description: ターン開始
+      #      parameters:
+      #        - in: query
+      #          name: characterId
+      #          description: キャラクターID
+      #          required: false
+      #          schema:
+      #            type: string
+      #            example: 32b65aaf-e62a-4358-9574-ed3a8a22d44d
+      #        - in: query
+      #          name: actionTypeName
+      #          description: 行動名
+      #          required: false
+      #          schema:
+      #            type: string
+      #            example: 攻撃
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BattleRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - turnStart
+components:
+  schemas:
+    BattleRequest:
+      required:
+        - isbn
+        - title
+        - price
+      type: object
+      properties:
+        isbn:
+          type: string
+          example: 978-4621303252
+        title:
+          type: string
+          example: Effective Java 第3版
+        price:
+          format: int32
+          type: integer
+          example: 4400
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+            - java
+            - programming

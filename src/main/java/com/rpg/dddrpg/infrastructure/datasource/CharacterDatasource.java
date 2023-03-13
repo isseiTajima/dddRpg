@@ -6,7 +6,7 @@ import com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperEntity;
 import com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperRepository;
 import com.rpg.dddrpg.domain.model.Status;
 import com.rpg.dddrpg.domain.model.character.Character;
-import com.rpg.dddrpg.domain.model.character.CharacterFactory;
+import com.rpg.dddrpg.domain.model.character.CharacterBuilder;
 import com.rpg.dddrpg.domain.repository.CharacterRepository;
 import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
@@ -32,7 +32,7 @@ public class CharacterDatasource implements CharacterRepository {
         // キャラクター情報を取得する
         CharactersMapperEntity entity = charactersMapperRepository.findById(id.toString());
 
-        var factory = new CharacterFactory();
+        var factory = new CharacterBuilder();
 
         // 存在しない場合は空を返す
         if (entity == null) {

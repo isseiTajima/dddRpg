@@ -5,8 +5,7 @@ import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
-import com.rpg.dddrpg.domain.value.Level;
-import com.rpg.dddrpg.domain.value.Name;
+import com.rpg.dddrpg.domain.value.*;
 
 import java.util.UUID;
 
@@ -26,6 +25,14 @@ public interface Character {
 
     UUID getId();
 
+    Attack getAttack();
+
+    Hp getHp();
+
+    Defence getDefence();
+
+    Speed getSpeed();
+
     Status getStatus();
 
     /**
@@ -34,5 +41,6 @@ public interface Character {
      * @return boolean
      */
     boolean isEmpty();
+
 
 }
