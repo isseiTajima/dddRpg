@@ -1,6 +1,6 @@
 package com.rpg.dddrpg;
 
-import com.rpg.dddrpg.domain.mapper.characters.CharactersMapperRepository;
+import com.rpg.dddrpg.domain.repository.BattleHistoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,13 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AnyTest {
 
     @Autowired
-    private CharactersMapperRepository repository;
+    private BattleHistoryRepository repository;
 
     @Test
-    public void test(){
-
-        var entity = repository.findAll();
-        System.out.println(entity.get(0).getName());
+    public void test() {
+//
+//        var entity = repository.findOneById();
+//        System.out.println(entity.get(0).getName());
 
     }
 

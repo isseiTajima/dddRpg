@@ -12,12 +12,13 @@ public enum CharacterType {
     playable(1, "操作可能", PlayableCharacter.class) {
 
     },
-    nonPlayable(2, "操作不能", PlayableCharacter.class) {
+    enemy(2, "敵", PlayableCharacter.class) {
 
     },
     unknown(null, "不明", Class.class) {
 
     };
+    // codeは不要かも
     private final Integer code;
     private final String name;
     private final Class<?> aClass;
@@ -47,7 +48,7 @@ public enum CharacterType {
     }
 
     public boolean isNonPlayable() {
-        return this == CharacterType.nonPlayable;
+        return this == CharacterType.enemy;
     }
 
     public boolean isUnknown() {

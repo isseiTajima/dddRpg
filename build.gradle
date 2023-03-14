@@ -49,6 +49,15 @@ jar {
 	}
 }
 
+
+sourceSets {
+	main {
+		java {
+			srcDirs 'src/main/java'
+			srcDirs "${rootDir}/build/xxxx"
+		}
+	}
+}
 openApiGenerate {
 	generatorName = "spring"
 	// 自動生成元となるopenapiの場所を指定しましょう。
@@ -58,7 +67,7 @@ openApiGenerate {
 	// 自動生成したControllerの配置位置を指定しましょう。
 	apiPackage = "com.rpg.dddrpg.presentation.controller"
 	// 利用していないですが、公式サイトに則り記載しています。
-	invokerPackage = "org.openapi.example.invoker"
+	invokerPackage = "com.rpg.dddrpg.invoker"
 	// 自動生成したModel(Request, Response等)の配置位置を指定しましょう。
 	modelPackage = "com.rpg.dddrpg.presentation.controller"
 //	// テストファイルの自動生成に関する設定。
@@ -91,7 +100,11 @@ sourceSets {
 	}
 }
 
-
+// コンパイル時にopenapiも再生成する
+compileJava {
+	dependsOn tasks.openApiGenerators
+	source "${buildDir}/generated/openapi/src/main/java"
+}
 //docker {
 //	name "${project.group}/${bootJar.archiveBaseName}"
 //

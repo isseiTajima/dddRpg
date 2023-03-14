@@ -10,6 +10,7 @@ public enum GenderType {
     man(1, "男"),
     female(2, "女"),
     unknown(null, "不明");
+    // codeは不要かも
     private final Integer code;
     private final String name;
 

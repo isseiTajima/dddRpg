@@ -13,7 +13,6 @@ import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
 import com.rpg.dddrpg.domain.value.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -21,9 +20,7 @@ import java.util.UUID;
 @Component
 public class CharacterDatasource implements CharacterRepository {
 
-    @Autowired
     private CharactersMapperRepository charactersMapperRepository;
-    @Autowired
     private CharacterStatusMapperRepository characterStatusMapperRepository;
 
     @Override

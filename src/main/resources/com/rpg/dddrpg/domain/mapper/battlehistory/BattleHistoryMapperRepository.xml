@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpg.dddrpg.domain.mapper.battlehistory.BattleHistoryMapperRepository">
+
+    <resultMap id="Result_Map_BattleHistory"
+               autoMapping="true"
+               type="com.rpg.dddrpg.domain.mapper.battlehistory.BattleHistoryMapperEntity">
+    </resultMap>
+
+    <select id="findById" parameterType="string" resultMap="Result_Map_BattleHistory">
+        select * from battleHistory where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.rpg.dddrpg.domain.mapper.battlehistory.BattleHistoryMapperEntity">
+        insert into battleHistory (id, enemyCharacterId) values
+        (#{id},#{enemyCharacterId})
+    </insert>
+
+</mapper>

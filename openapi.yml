@@ -123,25 +123,24 @@ components:
   schemas:
     BattleRequest:
       required:
-        - isbn
-        - title
-        - price
+        - characterId
+        - actionTypeName
+        - enemyCharacterId
       type: object
       properties:
-        isbn:
+        characterId:
           type: string
-          example: 978-4621303252
-        title:
+          example: 238c3083-c866-4c31-8850-a48e6a379009
+        actionTypeName:
           type: string
-          example: Effective Java 第3版
-        price:
-          format: int32
-          type: integer
-          example: 4400
-        tags:
-          type: array
-          items:
-            type: string
-          example:
-            - java
-            - programming
+          example: 攻撃
+        enemyCharacterId:
+          type: string
+          example: 238c3083-c866-4c31-8850-a48e6a379009
+#        tags:
+#          type: array
+#          items:
+#            type: string
+#          example:
+#            - java
+#            - programming

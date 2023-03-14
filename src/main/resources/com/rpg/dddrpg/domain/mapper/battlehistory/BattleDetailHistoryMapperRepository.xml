@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rpg.dddrpg.domain.mapper.battlehistory.BattleDetailHistoryMapperRepository">
+
+    <resultMap id="Result_Map_BattleDetailHistory"
+               type="com.rpg.dddrpg.domain.mapper.battlehistory.BattleDetailHistoryMapperEntity"
+               autoMapping="true">
+        <!--        <id column="id" property="id" jdbcType="VARCHAR"/>-->
+        <!--        <result column="battleHistoryId" property="battleHistoryId" jdbcType="VARCHAR"/>-->
+        <!--        <result column="characterId" property="characterId" jdbcType="VARCHAR"/>-->
+        <!--        <result column="actionType" property="actionType" jdbcType="VARCHAR"/>-->
+        <!--        <result column="hp" property="hp" jdbcType="VARCHAR"/>-->
+        <!--        <result column="enemyCharacterId" property="enemyCharacterId" jdbcType="VARCHAR"/>-->
+        <!--        <result column="enemyActionType" property="enemyActionType" jdbcType="VARCHAR"/>-->
+        <!--        <result column="enemyHp" property="enemyHp" jdbcType="VARCHAR"/>-->
+    </resultMap>
+
+    <select id="findById" parameterType="string" resultMap="Result_Map_BattleDetailHistory">
+        select * from BattleDetailHistory where id = #{id}
+    </select>
+
+    <insert id="insertBulk"
+            parameterType="java.util.List">
+        insert into BattleDetailHistory (id, battleHistoryId,characterId,actionType,hp
+        ,enemyCharacterId,enemyActionType,enemyHp) values
+        <foreach collection="battleHistoryList" item="bh" separator=",">
+            (
+            (#{bh.id},#{bh.battleHistoryId},#{bh.characterId},#{bh.actionType},#{bh.hp},#{bh.enemyCharacterId},
+            ,#{bh.enemyActionType},#{bh.enemyHp})
+            )
+        </foreach>
+    </insert>
+
+</mapper>

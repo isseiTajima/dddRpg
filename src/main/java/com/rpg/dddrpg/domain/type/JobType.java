@@ -6,8 +6,6 @@ public enum JobType {
     /**
      * 職業区分
      */
-
-
     hero(1, "勇者") {
 
     },
@@ -23,6 +21,7 @@ public enum JobType {
     unknown(null, "不明") {
 
     };
+    // codeは不要かも
     private final Integer code;
     private final String name;
 

@@ -3,6 +3,7 @@ package com.rpg.dddrpg.domain.value;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
+import lombok.Value;
 
 import java.util.Objects;
 import java.util.Random;
@@ -10,17 +11,9 @@ import java.util.Random;
 /**
  * 体力みたいな
  */
-
+@Value(staticConstructor = "of")
 public class Hp {
-    Integer value;
-
-    private Hp(Integer value) {
-        this.value = value;
-    }
-
-    public static Hp of(Integer value) {
-        return new Hp(value);
-    }
+    private Integer value;
 
     public static Hp initial(GenderType genderType, RaceType raceType,
                              JobType jobType) {
@@ -80,11 +73,6 @@ public class Hp {
         return randomValue - minValue;
 
     }
-
-    public Integer getValue() {
-        return this.value;
-    }
-
     public boolean isEmpty() {
         return this.value == null;
     }
