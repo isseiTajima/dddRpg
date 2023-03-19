@@ -37,6 +37,12 @@ public class Defence {
         return new Defence(defenceValue + addOfGenderValue + addOfRaceValue + addOfJobValue);
     }
 
+    public static Defence randomInitial() {
+        var random = new Random();
+        return Defence.of(random.nextInt(10,
+                100));
+    }
+
     static Integer calcAddValueOfRace(RaceType raceType) {
         // 種族の初期値を取得
         var defenceInitialValue = DefenceInitialOfRace.findByType(raceType);

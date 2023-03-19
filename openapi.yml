@@ -87,6 +87,23 @@ paths:
   #            application/json:
   #      tags:
   #        - create
+  /enemy/create:
+    post:
+      description: 敵作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnemyCreateRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - create
   /battle/turnstart:
     post:
       description: ターン開始
@@ -121,6 +138,14 @@ paths:
         - turnStart
 components:
   schemas:
+    EnemyCreateRequest:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: エスターク
     BattleRequest:
       required:
         - characterId

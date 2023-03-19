@@ -37,6 +37,12 @@ public class Attack {
         return new Attack(attackValue + addOfGenderValue + addOfRaceValue + addOfJobValue);
     }
 
+    public static Attack randomInitial() {
+        var random = new Random();
+        return Attack.of(random.nextInt(10,
+                100));
+    }
+
     static Integer calcAddValueOfRace(RaceType raceType) {
         // 種族の初期値を取得
         var attackInitialValue = AttackInitialOfRace.findByType(raceType);

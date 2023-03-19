@@ -30,6 +30,12 @@ public class Hp {
         return new Hp(hpValue + addOfGenderValue + addOfRaceValue + addOfJobValue);
     }
 
+    public static Hp randomInitial() {
+        var random = new Random();
+        return Hp.of(random.nextInt(30,
+                100));
+    }
+
     static Integer calcAddValueOfRace(RaceType raceType) {
         // 種族の初期値を取得
         var hpInitialValue = HpInitialOfRace.findByType(raceType);

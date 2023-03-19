@@ -1,6 +1,5 @@
 package com.rpg.dddrpg.domain.model.character;
 
-import com.rpg.dddrpg.domain.model.Status;
 import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;

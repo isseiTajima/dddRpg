@@ -1,4 +1,4 @@
-package com.rpg.dddrpg.domain.model;
+package com.rpg.dddrpg.domain.model.character;
 
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;

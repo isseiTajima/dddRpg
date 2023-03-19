@@ -37,6 +37,12 @@ public class Speed {
         return new Speed(speedValue + addOfGenderValue + addOfRaceValue + addOfJobValue);
     }
 
+    public static Speed randomInitial() {
+        var random = new Random();
+        return Speed.of(random.nextInt(10,
+                30));
+    }
+
     static Integer calcAddValueOfRace(RaceType raceType) {
         // 種族の初期値を取得
         var speedInitialValue = SpeedInitialOfRace.findByType(raceType);
