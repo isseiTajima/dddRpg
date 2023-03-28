@@ -1,41 +1,26 @@
 package com.rpg.dddrpg.domain.type;
 
-import java.util.Objects;
-
 /**
  * 種族区分
  */
 public enum RaceType {
 
-    human(1, "人間") {
+    human("人間") {
 
     },
-    elf(2, ("エルフ")) {
+    elf("エルフ") {
 
     },
-    ogre(3, "オーガ") {
+    ogre("オーガ") {
 
     },
-    unknown(null, "不明") {
+    unknown("不明") {
 
     };
-    // codeは不要かも
-    private final Integer code;
     private final String name;
 
-    RaceType(Integer code, String name) {
-        this.code = code;
+    RaceType(String name) {
         this.name = name;
-    }
-
-    public static RaceType findByCode(Integer code) {
-        for (RaceType classification : values()) {
-            if (Objects.equals(classification.code, code)) {
-                return classification;
-            }
-        }
-
-        return RaceType.unknown;
     }
 
     public static RaceType findByName(String name) {
@@ -52,10 +37,6 @@ public enum RaceType {
 
     public boolean isOgre() {
         return this == RaceType.ogre;
-    }
-
-    public Integer getCode() {
-        return code;
     }
 
     public String getName() {

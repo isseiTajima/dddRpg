@@ -95,6 +95,15 @@ public class Speed {
         return this.value == null;
     }
 
+    /**
+     * 自身より対象の値が以上かどうか
+     *
+     * @return
+     */
+    public boolean moreThenEqualFrom(Speed speed) {
+        return this.value <= speed.getValue();
+    }
+
     enum SpeedInitialOfGender {
         man(GenderType.man, 5, 8),
         female(GenderType.female, 4, 9),

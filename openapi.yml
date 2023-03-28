@@ -150,7 +150,7 @@ components:
       required:
         - characterId
         - actionTypeName
-        - enemyCharacterId
+        - enemyId
       type: object
       properties:
         characterId:

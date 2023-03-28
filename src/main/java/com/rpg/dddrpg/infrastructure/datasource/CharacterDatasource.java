@@ -5,10 +5,8 @@ import com.rpg.dddrpg.domain.mapper.characters.CharactersMapperRepository;
 import com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperEntity;
 import com.rpg.dddrpg.domain.mapper.characterstatus.CharacterStatusMapperRepository;
 import com.rpg.dddrpg.domain.model.character.Character;
-import com.rpg.dddrpg.domain.model.character.CharacterBuilder;
 import com.rpg.dddrpg.domain.model.character.Status;
 import com.rpg.dddrpg.domain.repository.CharacterRepository;
-import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
@@ -28,25 +26,23 @@ public class CharacterDatasource implements CharacterRepository {
 
         // キャラクター情報を取得する
         CharactersMapperEntity entity = charactersMapperRepository.findById(id.toString());
-
-        var factory = new CharacterBuilder();
+        ;
 
         // 存在しない場合は空を返す
         if (entity == null) {
-            return factory.build();
+            return Character.builder().build();
         }
 
         // Entityからキャラクターを作成する
-        factory.withId(UUID.fromString(entity.getId()));
-        factory.withName(Name.of(entity.getName()));
-        factory.withJobType(JobType.findByCode(entity.getJobType()));
-        factory.withGenderType(GenderType.findByCode(entity.getGenderType()));
-        factory.withRaceType(RaceType.findByCode(entity.getRaceType()));
-        factory.withCharacterType(CharacterType.findByCode(entity.getCharacterType()));
-        // ステータスを取得して設定
-        factory.withStatus(createStatus(id));
-
-        return factory.build();
+        return Character.builder()
+                .id(UUID.fromString(entity.getId()))
+                .name(Name.of(entity.getName()))
+                .jobType(JobType.findByName(entity.getJobType()))
+                .genderType(GenderType.findByName(entity.getGenderType()))
+                .raceType(RaceType.findByName(entity.getRaceType()))
+                // ステータスを取得して設定
+                .status(createStatus(id))
+                .build();
     }
 
     /**
@@ -140,10 +136,9 @@ public class CharacterDatasource implements CharacterRepository {
         CharactersMapperEntity entity = new CharactersMapperEntity();
         entity.setId(character.getId().toString());
         entity.setName(character.getName().getValue());
-        entity.setGenderType(character.getGenderType().getCode());
-        entity.setRaceType(character.getRaceType().getCode());
-        entity.setJobType(character.getJobType().getCode());
-        entity.setCharacterType(character.getCharacterType().getCode());
+        entity.setGenderType(character.getGenderType().getName());
+        entity.setRaceType(character.getRaceType().getName());
+        entity.setJobType(character.getJobType().getName());
         return entity;
     }
 

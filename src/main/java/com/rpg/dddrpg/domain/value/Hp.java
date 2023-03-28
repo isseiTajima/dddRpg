@@ -79,6 +79,8 @@ public class Hp {
         return randomValue - minValue;
 
     }
+
+
     public boolean isEmpty() {
         return this.value == null;
     }

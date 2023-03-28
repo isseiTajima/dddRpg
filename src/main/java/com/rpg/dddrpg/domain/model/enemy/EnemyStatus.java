@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.util.UUID;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 public class EnemyStatus {
 
     private UUID id;
@@ -22,4 +22,29 @@ public class EnemyStatus {
         return getId() == null;
 
     }
+
+    /**
+     * 攻撃後のHPを返却する
+     *
+     * @param attack 攻撃
+     * @return　攻撃後のHP
+     */
+    public Hp attackedHp(Attack attack) {
+        // HP - (Defence/2 - attack)
+        return Hp.of(this.hp.getValue() - (this.defence.getValue() / 2)
+                - attack.getValue());
+    }
+
+    /**
+     * 防御追加
+     *
+     * @param attack
+     * @return
+     */
+    public Hp attackedDefenceHp(Attack attack) {
+        // HP - Defence - attack
+        return Hp.of(this.hp.getValue() - this.defence.getValue()
+                - attack.getValue());
+    }
+
 }

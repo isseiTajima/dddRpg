@@ -26,7 +26,6 @@ public class BattleController implements BattleApi {
             @Parameter(name = "BattleRequest", description = "") @Valid @RequestBody(required = false) BattleRequest battleRequest
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
 
 

@@ -1,14 +1,15 @@
 package com.rpg.dddrpg.domain.type;
 
 import java.util.Objects;
+import java.util.Random;
 
 /**
- * 性別区分
+ * 行動区分
  */
 public enum ActionType {
 
-    attack("操作可能"),
-    defence("操作不能"),
+    attack("攻撃"),
+    defence("防御"),
     unknown("不明");
     private final String name;
 
@@ -25,8 +26,30 @@ public enum ActionType {
         return ActionType.unknown;
     }
 
+    /**
+     * ランダムにタイプを返却します
+     *
+     * @return 行動タイプ
+     */
+    public static ActionType randomType() {
+        var random = new Random();
+        var next = random.nextBoolean();
+        if (next) {
+            return ActionType.attack;
+        } else {
+            return ActionType.defence;
+        }
+    }
+
     public String getName() {
         return name;
     }
 
+    public boolean isAttack() {
+        return this == ActionType.attack;
+    }
+
+    public boolean isDefence() {
+        return this == ActionType.defence;
+    }
 }

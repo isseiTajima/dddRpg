@@ -30,7 +30,6 @@ public class BattleHistoryDatasource implements BattleHistoryRepository {
 
         var builder = BattleHistory.builder();
         builder.id(UUID.fromString(entity.getId()));
-        builder.winnerCharacterId(UUID.fromString(entity.getWinnerCharacterId()));
         builder.battleDetailsHistory(createBattleDetailFrom(getBattleDetailEntity(id)));
 
         // 存在しない場合は空を返す
@@ -114,7 +113,6 @@ public class BattleHistoryDatasource implements BattleHistoryRepository {
     BattleHistoryMapperEntity createMapperEntityFrom(BattleHistory bh) {
         BattleHistoryMapperEntity entity = new BattleHistoryMapperEntity();
         entity.setId(bh.getId().toString());
-        entity.setWinnerCharacterId(String.valueOf(bh.getWinnerCharacterId()));
         return entity;
     }
 

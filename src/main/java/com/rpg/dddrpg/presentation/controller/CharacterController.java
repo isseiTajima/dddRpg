@@ -4,6 +4,7 @@ import com.rpg.dddrpg.application.service.CharacterRegisterService;
 import com.rpg.dddrpg.application.service.CharacterSearchService;
 import com.rpg.dddrpg.application.service.request.CharacterRegisterServiceRequest;
 import com.rpg.dddrpg.domain.model.character.Character;
+import com.rpg.dddrpg.domain.model.character.Status;
 import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
@@ -43,7 +44,7 @@ public class CharacterController {
     @Operation(summary = "キャラクターを作成します。")
     @ResponseBody
     public void create(@RequestBody CharacterCreateRequest characterCreateRequest) {
-        characterRegisterService.create
+        characterRegisterService.execute
                 (convertRegisterServiceRequest(characterCreateRequest));
     }
 
@@ -54,7 +55,7 @@ public class CharacterController {
     @Operation(summary = "キャラクターを検索します。")
     @ResponseBody
     public ResponseEntity<CharacterSearchResponse> create(@RequestBody CharacterSearchRequest request) {
-        return new ResponseEntity<>(createSearchResponse(characterSearchService.search
+        return new ResponseEntity<>(createSearchResponse(characterSearchService.execute
                 (request)), HttpStatus.OK);
     }
 
@@ -87,10 +88,11 @@ public class CharacterController {
         response.setRaceTypeName(character.getRaceType().getName());
         response.setJobTypeName(character.getJobType().getName());
         response.setLevel(character.getLevel().getValue());
-        response.setHp(character.getHp().getValue());
-        response.setAttack(character.getAttack().getValue());
-        response.setDefence(character.getDefence().getValue());
-        response.setSpeed(character.getSpeed().getValue());
+        Status status = character.getStatus();
+        response.setHp(status.getHp().getValue());
+        response.setAttack(status.getAttack().getValue());
+        response.setDefence(status.getDefence().getValue());
+        response.setSpeed(status.getSpeed().getValue());
         return response;
     }
 

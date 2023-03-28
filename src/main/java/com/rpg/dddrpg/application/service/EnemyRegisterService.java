@@ -30,7 +30,7 @@ public class EnemyRegisterService {
      * @param name 敵名
      * @return 敵
      */
-    public void create(Name name) {
+    public void execute(Name name) {
 
         // キャラクターの生成
         UUID enemyId = UUID.randomUUID();

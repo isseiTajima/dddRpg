@@ -8,5 +8,4 @@ import lombok.Setter;
 public class BattleHistoryMapperEntity {
 
     private String id;
-    private String winnerCharacterId;
 }

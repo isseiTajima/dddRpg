@@ -10,7 +10,6 @@ import java.util.UUID;
 public class BattleHistory {
 
     private UUID id;
-    private UUID winnerCharacterId;
     private BattleDetailsHistory battleDetailsHistory;
 
 

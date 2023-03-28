@@ -8,7 +8,6 @@
         <result column="jobType" property="jobType" jdbcType="INTEGER"/>
         <result column="genderType" property="genderType" jdbcType="INTEGER"/>
         <result column="raceType" property="raceType" jdbcType="INTEGER"/>
-        <result column="characterType" property="characterType" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="findById" parameterType="string" resultMap="Result_Map_Characters">
@@ -18,13 +17,13 @@
         select * from characters
     </select>
     <insert id="insert" parameterType="com.rpg.dddrpg.domain.mapper.characters.CharactersMapperEntity">
-        insert into characters (id, name, jobType ,genderType ,raceType ,characterType) values
-        (#{id},#{name},#{jobType},#{genderType},#{raceType},#{characterType})
+        insert into characters (id, name, jobType ,genderType ,raceType ) values
+        (#{id},#{name},#{jobType},#{genderType},#{raceType})
     </insert>
     <update id="update" parameterType="com.rpg.dddrpg.domain.mapper.characters.CharactersMapperEntity">
         update characters set
-        id = #{id},name = #{name},jobType = #{jobType},genderType = #{genderType},raceType = #{raceType} ,characterType
-        = #{characterType} where id = #{id}
+        id = #{id},name = #{name},jobType = #{jobType},genderType = #{genderType},raceType = #{raceType} ,
+        where id = #{id}
     </update>
 <!--    <delete id="deleteTopic">-->
 <!--        delete from topics where id = #{id}-->

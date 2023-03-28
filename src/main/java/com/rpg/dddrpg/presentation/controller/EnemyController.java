@@ -31,7 +31,7 @@ public class EnemyController implements EnemyApi {
             @Parameter(name = "EnemyCreateRequest", description = "") @Valid @RequestBody(required = false) EnemyCreateRequest enemyCreateRequest
     ) {
 
-        enemyRegisterService.create(Name.of(enemyCreateRequest.getName()));
+        enemyRegisterService.execute(Name.of(enemyCreateRequest.getName()));
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

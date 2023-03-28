@@ -25,7 +25,7 @@ public class CharacterSearchService {
      * @param request キャラクター検索依頼
      * @return キャラクター情報
      */
-    public Character search(CharacterSearchRequest request) {
+    public Character execute(CharacterSearchRequest request) {
         // キャラクターの検索
         return characterRepository.findOneById(request.getId());
     }

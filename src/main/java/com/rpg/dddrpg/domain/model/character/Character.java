@@ -4,42 +4,31 @@ import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
-import com.rpg.dddrpg.domain.value.*;
+import com.rpg.dddrpg.domain.value.Level;
+import com.rpg.dddrpg.domain.value.Name;
+import lombok.Builder;
+import lombok.Value;
 
 import java.util.UUID;
 
-public interface Character {
+@Builder(toBuilder = true)
+@Value
+public class Character {
 
-    Name getName();
+    private final UUID id;
+    private final Name name;
 
-    RaceType getRaceType();
+    private final Level level;
+    private final RaceType raceType;
 
-    GenderType getGenderType();
+    private final GenderType genderType;
 
-    JobType getJobType();
+    private final JobType jobType;
+    private final CharacterType characterType;
+    private final Status status;
 
-    CharacterType getCharacterType();
-
-    Level getLevel();
-
-    UUID getId();
-
-    Attack getAttack();
-
-    Hp getHp();
-
-    Defence getDefence();
-
-    Speed getSpeed();
-
-    Status getStatus();
-
-    /**
-     * empty判定
-     *
-     * @return boolean
-     */
-    boolean isEmpty();
-
+    public boolean isEmpty() {
+        return this.id == null;
+    }
 
 }

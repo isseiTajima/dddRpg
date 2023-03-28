@@ -1,32 +1,17 @@
 package com.rpg.dddrpg.domain.type;
 
-import java.util.Objects;
-
 /**
  * 性別区分
  */
 public enum GenderType {
 
-    man(1, "男"),
-    female(2, "女"),
-    unknown(null, "不明");
-    // codeは不要かも
-    private final Integer code;
+    man("男"),
+    female("女"),
+    unknown("不明");
     private final String name;
 
-    GenderType(Integer code, String name) {
-        this.code = code;
+    GenderType(String name) {
         this.name = name;
-    }
-
-    public static GenderType findByCode(Integer code) {
-        for (GenderType classification : values()) {
-            if (Objects.equals(classification.code, code)) {
-                return classification;
-            }
-        }
-
-        return GenderType.unknown;
     }
 
     public static GenderType findByName(String name) {
@@ -43,10 +28,6 @@ public enum GenderType {
 
     public boolean isUnknown() {
         return this == GenderType.unknown;
-    }
-
-    public Integer getCode() {
-        return code;
     }
 
     public String getName() {
