@@ -1,5 +1,10 @@
 package com.rpg.dddrpg.domain.type;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum JobType {
     /**
      * 職業区分
@@ -21,10 +26,6 @@ public enum JobType {
     };
     private final String name;
 
-    JobType(String name) {
-        this.name = name;
-    }
-
     public static JobType findByName(String name) {
         return JobType.valueOf(name);
     }
@@ -38,18 +39,18 @@ public enum JobType {
     }
 
     public boolean isWizard() {
-            return this == JobType.wizard;
-        }
+        return this == JobType.wizard;
+    }
 
-        public boolean isPriest() {
-            return this == JobType.priest;
-        }
+    public boolean isPriest() {
+        return this == JobType.priest;
+    }
 
-        public boolean isUnknown() {
-            return this == JobType.unknown;
-        }
+    public boolean isUnknown() {
+        return this == JobType.unknown;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getName() {
+        return name;
+    }
 }

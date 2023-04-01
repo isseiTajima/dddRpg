@@ -1,18 +1,19 @@
 package com.rpg.dddrpg.domain.type;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 性別区分
  */
+@AllArgsConstructor
+@Getter
 public enum GenderType {
 
     man("男"),
     female("女"),
     unknown("不明");
     private final String name;
-
-    GenderType(String name) {
-        this.name = name;
-    }
 
     public static GenderType findByName(String name) {
         return GenderType.valueOf(name);
@@ -30,7 +31,4 @@ public enum GenderType {
         return this == GenderType.unknown;
     }
 
-    public String getName() {
-        return name;
-    }
 }

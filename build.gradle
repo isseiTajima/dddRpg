@@ -5,7 +5,6 @@ plugins {
 	id "org.openapi.generator" version "6.2.0"
 }
 
-apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.rpg'
@@ -39,15 +38,15 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-jar {
-	enabled = false
-	manifest {
-		attributes(
-				'Main-Class': 'DddRpgApplication'
-		)
-	}
-}
+//
+//jar {
+//	enabled = false
+//	manifest {
+//		attributes(
+//				'Main-Class': 'DddRpgApplication'
+//		)
+//	}
+//}
 
 
 sourceSets {

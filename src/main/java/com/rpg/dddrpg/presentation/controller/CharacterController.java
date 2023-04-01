@@ -5,7 +5,6 @@ import com.rpg.dddrpg.application.service.CharacterSearchService;
 import com.rpg.dddrpg.application.service.request.CharacterRegisterServiceRequest;
 import com.rpg.dddrpg.domain.model.character.Character;
 import com.rpg.dddrpg.domain.model.character.Status;
-import com.rpg.dddrpg.domain.type.CharacterType;
 import com.rpg.dddrpg.domain.type.GenderType;
 import com.rpg.dddrpg.domain.type.JobType;
 import com.rpg.dddrpg.domain.type.RaceType;
@@ -67,7 +66,7 @@ public class CharacterController {
      */
     CharacterRegisterServiceRequest convertRegisterServiceRequest(CharacterCreateRequest request) {
         var serviceRequest = CharacterRegisterServiceRequest.of(
-                request.getId(), Name.of(request.getName()), CharacterType.findByName(request.getCharacterTypeName()),
+                request.getId(), Name.of(request.getName()),
                 GenderType.findByName(request.getGenderTypeName()), RaceType.findByName(request.getRaceTypeName()),
                 JobType.findByName(request.getJobTypeName()));
         return serviceRequest;

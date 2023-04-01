@@ -1,8 +1,13 @@
 package com.rpg.dddrpg.domain.type;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 種族区分
  */
+@AllArgsConstructor
+@Getter
 public enum RaceType {
 
     human("人間") {
@@ -18,10 +23,6 @@ public enum RaceType {
 
     };
     private final String name;
-
-    RaceType(String name) {
-        this.name = name;
-    }
 
     public static RaceType findByName(String name) {
         return RaceType.valueOf(name);
@@ -39,8 +40,5 @@ public enum RaceType {
         return this == RaceType.ogre;
     }
 
-    public String getName() {
-        return name;
-    }
 
 }

@@ -2,10 +2,13 @@ package com.rpg.dddrpg.application.service;
 
 import com.rpg.dddrpg.application.service.request.CharacterRegisterServiceRequest;
 import com.rpg.dddrpg.domain.model.character.Character;
+import com.rpg.dddrpg.domain.model.character.Status;
 import com.rpg.dddrpg.domain.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 /**
  * キャラクター登録更新に関するサービス
@@ -31,13 +34,18 @@ public class CharacterRegisterService {
 
 
         // キャラクターの生成
+        UUID id = UUID.randomUUID();
+        if (request.getId() != null) {
+            id = request.getId();
+        }
         var factory = Character.builder()
-                .id(request.getId())
+                .id(id)
                 .name(request.getName())
                 .jobType(request.getJobType())
                 .genderType(request.getGenderType())
                 .raceType(request.getRaceType())
-                .characterType(request.getCharacterType());
+                .status(Status.initial(request.getGenderType(),
+                        request.getRaceType(), request.getJobType()));
 
         // キャラクターの保存
         characterRepository.save(factory.build());

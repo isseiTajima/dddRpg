@@ -8,7 +8,7 @@ import com.rpg.dddrpg.domain.model.enemy.Enemy;
 import com.rpg.dddrpg.domain.model.enemy.EnemyStatus;
 import com.rpg.dddrpg.domain.repository.BattleHistoryRepository;
 import com.rpg.dddrpg.domain.type.ActionType;
-import com.rpg.dddrpg.domain.type.FhaseType;
+import com.rpg.dddrpg.domain.type.PhaseType;
 import com.rpg.dddrpg.domain.value.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +40,7 @@ public class BattleService {
         ActionType enemyActionType = ActionType.randomType();
 
         // どちらのフェーズか決定
-        FhaseType fhaseType = getFhaseType(character, enemy);
+        PhaseType phaseType = getFhaseType(character, enemy);
 
         // 攻撃に応じてHPを減算
         Character turnedCharacter;
@@ -166,7 +166,7 @@ public class BattleService {
      * @param enemy     敵
      * @return 行動タイプ
      */
-    FhaseType getFhaseType(Character character, Enemy enemy) {
+    PhaseType getFhaseType(Character character, Enemy enemy) {
 
         Speed speed = character.getStatus().getSpeed();
         Speed enemySpeed = enemy.getStatus().getSpeed();
@@ -175,9 +175,9 @@ public class BattleService {
          * スピードを比較して値が大きい方のフェーズを返却する
          */
         if (speed.moreThenEqualFrom(enemySpeed)) {
-            return FhaseType.enemy;
+            return PhaseType.enemy;
         }
-        return FhaseType.ally;
+        return PhaseType.ally;
 
     }
 

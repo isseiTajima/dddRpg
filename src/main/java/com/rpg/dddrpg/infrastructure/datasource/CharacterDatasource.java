@@ -21,12 +21,17 @@ public class CharacterDatasource implements CharacterRepository {
     private CharactersMapperRepository charactersMapperRepository;
     private CharacterStatusMapperRepository characterStatusMapperRepository;
 
+    CharacterDatasource(CharactersMapperRepository charactersMapperRepository,
+                        CharacterStatusMapperRepository characterStatusMapperRepository) {
+        this.charactersMapperRepository = charactersMapperRepository;
+        this.characterStatusMapperRepository = characterStatusMapperRepository;
+    }
+
     @Override
     public Character findOneById(UUID id) {
 
         // キャラクター情報を取得する
         CharactersMapperEntity entity = charactersMapperRepository.findById(id.toString());
-        ;
 
         // 存在しない場合は空を返す
         if (entity == null) {
@@ -71,7 +76,7 @@ public class CharacterDatasource implements CharacterRepository {
         Character duplicateCharacter = findOneById(character.getId());
 
         // 存在しない場合はインサート
-        if (duplicateCharacter == null) {
+        if (duplicateCharacter.isEmpty()) {
             // キャラクターテーブルにインサート
             insertCharacter(character);
             // キャラクターステータステーブルにインサート

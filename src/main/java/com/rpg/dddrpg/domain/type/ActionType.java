@@ -1,21 +1,22 @@
 package com.rpg.dddrpg.domain.type;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Objects;
 import java.util.Random;
 
 /**
  * 行動区分
  */
+@AllArgsConstructor
+@Getter
 public enum ActionType {
 
     attack("攻撃"),
     defence("防御"),
     unknown("不明");
     private final String name;
-
-    ActionType(String name) {
-        this.name = name;
-    }
 
     public static ActionType findByName(String name) {
         for (ActionType classification : values()) {
@@ -39,10 +40,6 @@ public enum ActionType {
         } else {
             return ActionType.defence;
         }
-    }
-
-    public String getName() {
-        return name;
     }
 
     public boolean isAttack() {
